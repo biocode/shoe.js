@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" py:if="False"/>
+    <title>CARDS</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <!-- <link rel="stylesheet/less" type="text/css" media="screen" href="less/main.less" /> -->
+    <!--! <link rel="stylesheet" type="text/css" media="screen" href="bootstrap/bootstrap.css" /> -->
+    <link rel="stylesheet" type="text/css" media="screen" href="js/lib/jq.ui/css/ui-lightness/jquery-ui-1.8.17.custom.css" />
+    <style type="text/css">body {padding-top: 60px;}</style>
+    <script type="text/javascript" lang="en" src="js/lib/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" lang="en" src="js/lib/jq.ui/js/jquery-ui-1.8.17.custom.min.js"></script>
+    <script type="text/javascript" lang="en" src="js/lib/underscore.js"></script>
+    <script type="text/javascript" lang="en" src="js/lib/less-1.2.1.min.js"></script>
+    <!-- <script type="text/javascript" lang="en" src="bootstrap/js/bootstrap-tabs.js"></script> --> 
+    <style type="text/css">
+        body {background: url(img/armada.gif); height:100%;}
+        #flash {padding:20px;background-color:#AFAF88;border:2px solid #232323;font-weight:bold;margin-bottom:20px;}
+        #page {height:100%; min-height:450px;border:4px solid #EFD600;
+            -webkit-border-radius: 8px;
+            -moz-border-radius: 8px;
+            border-radius: 8px;
+            /* for W3C-compliant browsers */
+            background-image: linear-gradient(top, rgba(0,96,0,255) 19%, rgba(0,109,0,255) 37%, rgba(0,122,0,255) 46%, rgba(0,112,0,255) 53%, rgba(0,102,0,255) 58%, rgba(0,95,0,255) 80%, rgba(0,88,0,255) 84%);
+            /* for Safari 5.03+ and Chrome 7+ */
+            background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.18667665, rgba(0,96,0,255)), color-stop(0.3733533, rgba(0,109,0,255)), color-stop(0.45560374034350004, rgba(0,122,0,255)), color-stop(0.5274358, rgba(0,112,0,255)), color-stop(0.58282523132624, rgba(0,102,0,255)), color-stop(0.79506, rgba(0,95,0,255)), color-stop(0.841212713434, rgba(0,88,0,255)));
+            /* for Firefox 3.6+ */
+            background-image: -moz-linear-gradient(top, rgba(0,96,0,255) 19%, rgba(0,109,0,255) 37%, rgba(0,122,0,255) 46%, rgba(0,112,0,255) 53%, rgba(0,102,0,255) 58%, rgba(0,95,0,255) 80%, rgba(0,88,0,255) 84%);
+            /* for Opera 11.1+ */
+            background-image: -o-linear-gradient(top, rgba(0,96,0,255) 19%, rgba(0,109,0,255) 37%, rgba(0,122,0,255) 46%, rgba(0,112,0,255) 53%, rgba(0,102,0,255) 58%, rgba(0,95,0,255) 80%, rgba(0,88,0,255) 84%);
+        }
+        #banner {margin-left:auto;margin-right:auto;border-bottom:solid 6px #232323;padding:20px;}
+        #body {padding:20px;}
+        .ui-draggable-dragging {
+            border:0px !important;
+            z-index: 1000;
+            -moz-box-shadow:    3px 3px 26px 3px gold;
+            -webkit-box-shadow: 3px 3px 26px 3px gold;
+            box-shadow:         3px 3px 26px 3px gold;
+        }
+        #toprow, #stackrow {margin-top:20px;}
+        .row .card {margin-left:20px;color:red;}
+        #stackrow > .stack > .card .card {top: -120px;}
+        .stackfix {margin-top:-100px !important;border-top:2px solid #232323;}
+        .target-border {
+            -moz-box-shadow:    inset 0 0 3px 4px #082 !important;
+            -webkit-box-shadow: inset 0 0 3px 4px #082 !important;
+            box-shadow:         inset 0 0 3px 4px #082 !important;
+        }
+        .target-pile {
+            line-height:96px;font-size:36px;text-align:center;
+            width:72px !important;
+            height: 96px !important;
+            margin-left:42px !important;
+        }
+        /* .pilefix {position:relative;top:0px;left:0px;clear:none;margin-top:-40px !important;} */
+        .pilefix {margin-top:-80px !important;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="cards.css" />
+</head>
+
+<body>
+    <div id="page" class="row span16">
+        
+        <div id="toprow" class="row">
+            <div id="deck" class="card target-pile target-border span2"> </div>
+            <div id="bones" class="card target-pile target-border span2"> </div>
+            <div class="card target-pile span2"> &nbsp; </div> <!--! Blank Space -->
+            <div id="clubs_stack" class="card target-pile target-border span2"> &clubs; </div>
+            <div id="spades_stack" class="card target-pile target-border span2"> &spades; </div>
+            <div id="hearts_stack" class="card target-pile target-border span2"> &hearts; </div>
+            <div id="diamonds_stack" class="card target-pile target-border span2"> &diams; </div>
+        </div>
+        
+        <div id="stackrow" class="row">
+            <div id="one" class="card stack span2"></div>
+            <div id="two" class="card stack span2"></div>
+            <div id="three" class="card stack span2"></div>
+            <div id="four" class="card stack span2"></div>
+            <div id="five" class="card stack span2"></div>
+            <div id="six" class="card stack span2"></div>
+            <div id="seven" class="card stack span2"></div>
+        </div>
+        
+    </div>    
+<script type="text/javascript" src="deck.js"></script>
+<script type="text/javascript" src="solitare.js"></script>
+</body>
+</html>
